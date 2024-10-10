@@ -94,6 +94,8 @@ void setup() {
   _sgtl5000_1.volume(0.5);
 
   _reverb.roomsize(0.8);
+  _dryAmp.gain(1);
+  _wetAmp.gain(1);
   _mixer.gain(0, 0.5);
   _mixer.gain(1, 0.5);
 
@@ -106,10 +108,8 @@ void setup() {
 }
 
 void loop() {
-  _dryAmp.gain(0.5);
-  _wetAmp.gain(0.5);
-
   // Check for buffer size updates periodically
+  // TODO: check difference, maybe running avg
   unsigned long currentTime = millis();
   if (currentTime - lastUpdateCheck >= UPDATE_INTERVAL) {
     float bufferTime = map(_bufferSizeParameter * 1000, 0, 1000,
